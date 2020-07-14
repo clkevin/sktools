@@ -7,3 +7,7 @@ var Host string
 var Help string
 
 var Port string
+
+var Connection int
+
+var Content string

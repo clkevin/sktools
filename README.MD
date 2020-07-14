@@ -1,9 +1,10 @@
 
 # 工具介绍
-该工具用于发送tcp报文
+该工具用于发送报文
 
-# 使用方式
-以向百度发送tcp报文为例介绍如何使用
+# tcp action
+### 介绍
+用于向某个服务发送tcp报文，以向百度发送tcp报文为例介绍如何使用
 ### 通过ping www.baidu.com获取百度的ip
 ```
 >$ ping www.baidu.com
@@ -29,3 +30,13 @@ Host: www.baidu.com
 
 > 虽然telnet可以实现该功能，但是telnet只能一行一行的发送，如果想实现发送多行，比较麻烦，故开发该工具
 
+# tcp test action
+### 介绍
+用于批量向某个服务发送tcp报文
+### 示例
+```
+sktools -a tcptest  -host 127.0.0.1 -port 9000 -c 10 -content abc
+
+```
+* c 多少个连接
+* content 内容，可为空

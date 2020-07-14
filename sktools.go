@@ -15,5 +15,6 @@ func init() {
 	flag.StringVar(&context.Action, "a", "tcp",actionUsage)
 	flag.StringVar(&context.Host, "host", "127.0.0.1", "host ip")
 	flag.StringVar(&context.Port, "port", "80", "host port")
+	flag.IntVar(&context.Connection, "c", 10, "connection ")
 	flag.Parse()
 }
