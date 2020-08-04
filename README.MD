@@ -35,7 +35,10 @@ Host: www.baidu.com
 用于批量向某个服务发送tcp报文
 ### 示例
 ```
-sktools -a tcptest  -host 127.0.0.1 -port 9000 -c 10 -content abc
+sktools -a tcptest  -host 127.0.0.1 -port 9000 -c 10 -content abc -keepalive 10 -connectiontime 1 -count -1
+
+
+bogon:sktools liukai$ go run sktools.go -a tcptest  -host 127.0.0.1 -port 9000 -c 4000  -keepalive 10 -connectiontime 10 -count -1
 
 ```
 * c 多少个连接

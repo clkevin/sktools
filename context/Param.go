@@ -11,3 +11,11 @@ var Port string
 var Connection int
 
 var Content string
+
+
+var KeepaliveIntervalTime int
+
+var ConnIntervalTime int
+
+var Count int
+

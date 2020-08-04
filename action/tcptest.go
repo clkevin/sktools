@@ -9,27 +9,40 @@ import (
 type Tcptest struct {
 }
 
+var channels = make(chan string, context.Connection)
+
 func (a *Tcptest) Action() {
 	println("tcptest")
 	for i := 0; i < context.Connection; i++ {
 		go testConn()
+		//time.Sleep(time.Duration(context.ConnIntervalTime) * time.Second)
+		time.Sleep(time.Duration(context.ConnIntervalTime)*time.Millisecond)
 	}
-	println("sleep")
-	time.Sleep(10 * time.Second)
+	//println("sleep")
+	//time.Sleep((time.Duration(context.Count)+5)*time.Second )
+	for i := 0; i < context.Connection; i++ {
+		var str = <-channels
+		println(str)
+	}
 }
 
 func testConn() {
-	println("open connection!!!")
 	conn := tcp.Connection()
+	println(conn.LocalAddr().String(), "open connection!!!")
 	index := 0
 	for true {
 		index ++
+		println(conn.LocalAddr().String(), "write:", context.Content)
 		tcp.Write(conn, context.Content)
-		if index > 10 {
+		if context.Count != -1 && index >= context.Count {
 			break
 		}
-		time.Sleep(1* time.Second)
+		sleepTime := time.Duration(context.KeepaliveIntervalTime) * time.Second
+		time.Sleep(sleepTime)
 	}
+	conn.Close()
+	println("close connection")
+	channels <- conn.LocalAddr().String() + " close connection"
 }
 
 func (a *Tcptest) Alias() (string, string) {
